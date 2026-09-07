@@ -21,6 +21,14 @@ export default function Home() {
           </div>
           <div className="rule" aria-hidden="true" />
           <p className="coming-soon">Coming Easter 2027</p>
+          <a
+            href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="audition-btn"
+          >
+            Cast &amp; Crew Auditions
+          </a>
         </div>
       </main>
       <VideoSection />
