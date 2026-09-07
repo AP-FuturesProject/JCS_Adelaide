@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://w.behold.so;
+      frame-src https://www.youtube.com https://player.vimeo.com;
+      img-src 'self' data: https://*.cdninstagram.com https://*.fbcdn.net;
+      connect-src 'self' https://graph.instagram.com;
+      style-src 'self' 'unsafe-inline';
+    """
