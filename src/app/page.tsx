@@ -8,7 +8,7 @@ export default function Home() {
       <main className="stage">
         <div className="video-bg-wrap" aria-hidden="true">
         <iframe
-          src="https://www.youtube.com/embed/IdX7JvGPiTw?autoplay=1&mute=1&loop=1&controls=0&playlist=IdX7JvGPiTw&playsinline=1&disablekb=1&iv_load_policy=3&rel=0"
+          src="https://www.youtube.com/embed/IdX7JvGPiTw?autoplay=1&mute=1&loop=1&controls=0&playlist=IdX7JvGPiTw&playsinline=1&disablekb=1&iv_load_policy=3&rel=0&modestbranding=1&showinfo=0&cc_load_policy=0&fs=0"
           frameBorder="0"
           allow="autoplay; encrypted-media"
           className="video-bg-iframe"
