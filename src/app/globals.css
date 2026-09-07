@@ -108,7 +108,7 @@ body {
 
 /* Video */
 .video-section {
-  background: var(--c-ground);
+  background: #1c1b19;
   padding: 3rem 2rem;
   display: flex;
   justify-content: center;
