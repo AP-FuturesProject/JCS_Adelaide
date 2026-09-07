@@ -1,4 +1,5 @@
 import Image from "next/image";
+import VideoSection from "@/components/VideoSection";
 import InstagramFeed from "@/components/InstagramFeed";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
           <p className="coming-soon">Coming Easter 2027</p>
         </div>
       </main>
+      <VideoSection />
       <InstagramFeed />
     </>
   );

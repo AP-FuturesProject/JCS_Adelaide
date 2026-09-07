@@ -106,6 +106,28 @@ body {
   display: block;
 }
 
+/* Video */
+.video-section {
+  background: var(--c-ground);
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.video-wrap {
+  position: relative;
+  width: min(900px, 100%);
+  padding-top: calc(min(900px, 100%) * 0.5625);
+}
+
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Instagram feed */
 .ig-section {
   background: #0d0b09;
