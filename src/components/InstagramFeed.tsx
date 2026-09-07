@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "behold-widget": React.DetailedHTMLProps<
