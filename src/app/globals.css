@@ -77,33 +77,6 @@ body {
   margin-bottom: 2.25rem;
 }
 
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  line-height: 1;
-}
-
-.title-jesus-christ {
-  font-family: var(--font-cinzel), "Cinzel Decorative", Georgia, serif;
-  font-size: clamp(1.5rem, 5.5vw, 4.25rem);
-  font-weight: 400;
-  color: var(--c-text);
-  letter-spacing: 0.06em;
-  text-wrap: balance;
-  line-height: 1.1;
-}
-
-.title-superstar {
-  font-family: var(--font-cinzel), "Cinzel Decorative", Georgia, serif;
-  font-size: clamp(3.25rem, 13vw, 10rem);
-  font-weight: 900;
-  color: var(--c-text);
-  letter-spacing: 0.02em;
-  line-height: 0.9;
-  margin-top: 0.05em;
-}
 
 .rule {
   width: 4rem;
@@ -120,4 +93,82 @@ body {
   letter-spacing: 0.5em;
   text-transform: uppercase;
   color: var(--c-gold-muted);
+}
+
+/* Logo */
+.logo-wrap {
+  width: min(860px, 90vw);
+}
+
+.logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Instagram feed */
+.ig-section {
+  background: #0d0b09;
+  padding: 4rem 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.ig-label {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--c-gold-muted);
+}
+
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  width: min(720px, 100%);
+}
+
+.ig-cell {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #1a1410;
+  display: block;
+}
+
+.ig-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.ig-cell:hover img {
+  opacity: 0.75;
+}
+
+.ig-skeleton {
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background: #1a1410; }
+  50% { background: #251e16; }
+}
+
+.ig-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: rgba(240, 235, 225, 0.7);
+  pointer-events: none;
 }
