@@ -1,3 +1,123 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --c-ground: #080705;
+  --c-text: #f0ebe1;
+  --c-gold: #c9a84c;
+  --c-gold-muted: rgba(201, 168, 76, 0.45);
+  --c-rule: rgba(201, 168, 76, 0.3);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--c-ground);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.stage {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3rem 1.5rem;
+}
+
+.spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 65% at 50% 42%,
+    rgba(201, 168, 76, 0.13) 0%,
+    rgba(201, 168, 76, 0.05) 40%,
+    transparent 72%
+  );
+  pointer-events: none;
+  animation: breathe 7s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight { animation: none; }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.location {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 2.25rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 1;
+}
+
+.title-jesus-christ {
+  font-family: var(--font-cinzel), "Cinzel Decorative", Georgia, serif;
+  font-size: clamp(1.5rem, 5.5vw, 4.25rem);
+  font-weight: 400;
+  color: var(--c-text);
+  letter-spacing: 0.06em;
+  text-wrap: balance;
+  line-height: 1.1;
+}
+
+.title-superstar {
+  font-family: var(--font-cinzel), "Cinzel Decorative", Georgia, serif;
+  font-size: clamp(3.25rem, 13vw, 10rem);
+  font-weight: 900;
+  color: var(--c-text);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  margin-top: 0.05em;
+}
+
+.rule {
+  width: 4rem;
+  height: 1px;
+  background: var(--c-rule);
+  margin: 2.75rem 0;
+}
+
+.coming-soon {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--c-gold-muted);
+}

@@ -1,8 +1,16 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">JCS Adelaide</h1>
-      <p className="mt-4 text-lg text-gray-500">Coming soon.</p>
+    <main className="stage">
+      <div className="spotlight" aria-hidden="true" />
+      <div className="content">
+        <p className="location">Adelaide</p>
+        <h1 className="title">
+          <span className="title-jesus-christ">Jesus Christ</span>
+          <span className="title-superstar">Superstar</span>
+        </h1>
+        <div className="rule" aria-hidden="true" />
+        <p className="coming-soon">Coming Soon</p>
+      </div>
     </main>
   );
 }
