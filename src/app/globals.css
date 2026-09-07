@@ -126,49 +126,7 @@ body {
   color: var(--c-gold-muted);
 }
 
-.ig-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
+behold-widget {
   width: min(720px, 100%);
-}
-
-.ig-cell {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: #1a1410;
   display: block;
-}
-
-.ig-cell img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.3s ease;
-}
-
-.ig-cell:hover img {
-  opacity: 0.75;
-}
-
-.ig-skeleton {
-  animation: shimmer 1.6s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background: #1a1410; }
-  50% { background: #251e16; }
-}
-
-.ig-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: rgba(240, 235, 225, 0.7);
-  pointer-events: none;
 }

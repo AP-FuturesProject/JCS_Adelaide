@@ -19,7 +19,7 @@ export default function Home() {
             />
           </div>
           <div className="rule" aria-hidden="true" />
-          <p className="coming-soon">Coming Soon</p>
+          <p className="coming-soon">Coming Easter 2027</p>
         </div>
       </main>
       <InstagramFeed />
