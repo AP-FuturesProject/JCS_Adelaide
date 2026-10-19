@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cinzel_Decorative, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
@@ -18,6 +18,12 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Jesus Christ Superstar Adelaide",
   description: "Coming Soon",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
