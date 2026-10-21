@@ -53,7 +53,6 @@ export default function Home() {
         </div>
         <div className="spotlight" aria-hidden="true" />
         <div className="content">
-          <p className="location">Adelaide, South Australia</p>
           <div className="logo-wrap">
             <Image
               src="/jcs-logo.png"
@@ -87,7 +86,10 @@ export default function Home() {
             padTo={11}
             intro
           />
-          <p className="venue">Futures Event Centre &middot; Paradise</p>
+          <p className="venue">
+            <span>Futures Event Centre &middot; Paradise</span>
+            <span>Adelaide, South Australia</span>
+          </p>
           <VideoSection />
           {auditionsOpen ? (
             <SpecularButton
