@@ -55,6 +55,20 @@ const GRAIN = `url("data:image/svg+xml,${encodeURIComponent(
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
+type MotionEventCtor = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<PermissionState>;
+};
+
+/* iOS gates motion behind a permission prompt that must come from a gesture.
+   Shared across cards so one tap arms the whole grid with a single prompt. */
+let motionConsent: Promise<boolean> | null = null;
+const askForMotion = (Motion: MotionEventCtor) => {
+  motionConsent ??= Motion.requestPermission!()
+    .then(state => state === 'granted')
+    .catch(() => false);
+  return motionConsent;
+};
+
 const isDark = (color: string) => {
   const match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(color).trim());
   if (!match) return null;
@@ -297,6 +311,9 @@ const ProfileCard = ({
     const root = rootRef.current;
     if (!root || !enableMobileTilt) return;
 
+    const Motion = window.DeviceOrientationEvent as MotionEventCtor | undefined;
+    if (!Motion) return;
+
     let listening = false;
     const onOrientation = (event: DeviceOrientationEvent) => {
       if (event.beta == null || event.gamma == null) return;
@@ -308,24 +325,26 @@ const ProfileCard = ({
       listening = true;
       window.addEventListener('deviceorientation', onOrientation);
     };
-    const onClick = () => {
-      const Motion = window.DeviceOrientationEvent as typeof DeviceOrientationEvent & {
-        requestPermission?: () => Promise<PermissionState>;
-      };
-      if (Motion && typeof Motion.requestPermission === 'function') {
-        Motion.requestPermission()
-          .then(state => {
-            if (state === 'granted') listen();
-          })
-          .catch(() => {});
-      } else {
-        listen();
-      }
-    };
 
-    root.addEventListener('click', onClick);
+    // Android and the rest expose motion without asking, so don't wait for a tap.
+    // Gated on a coarse pointer: some laptops carry an accelerometer, and a
+    // screen held upright reads as a hard tilt that would skew the whole grid.
+    if (typeof Motion.requestPermission !== 'function') {
+      if (!window.matchMedia?.('(pointer: coarse)').matches) return;
+      listen();
+      return () => window.removeEventListener('deviceorientation', onOrientation);
+    }
+
+    // iOS: the prompt needs a gesture, and it listens on the document rather
+    // than the card so one tap anywhere arms every card, not just the tapped one.
+    const onGesture = () => {
+      askForMotion(Motion).then(granted => {
+        if (granted) listen();
+      });
+    };
+    document.addEventListener('pointerdown', onGesture, { once: true });
     return () => {
-      root.removeEventListener('click', onClick);
+      document.removeEventListener('pointerdown', onGesture);
       window.removeEventListener('deviceorientation', onOrientation);
     };
   }, [enableMobileTilt]);
