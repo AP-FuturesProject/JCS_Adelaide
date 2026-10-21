@@ -1288,10 +1288,10 @@ body {
 
 /* ─── Footer ──────────────────────────────────────────────── */
 
-/* Shares the Instagram section's ground with no rule between them, so the
-   clipped phone reads as running off the page rather than hitting a divider. */
+/* No rule above it, so the clipped phone reads as running off the page
+   rather than hitting a divider. */
 .site-footer {
-  background: #0d0b09;
+  background: #000;
   padding: 3rem 1.5rem;
   padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
   display: flex;
@@ -1370,4 +1370,45 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(240, 235, 225, 0.32);
+}
+
+/* ─── CurvedLoop (react-bits) ─────────────────────────────── */
+
+/* The vendor stylesheet gives the jacket min-height: 100vh, which is sized
+   for a full-screen hero rather than a divider strip. */
+.curved-loop-jacket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  display: block;
+  overflow: visible;
+  fill: currentColor;
+  -webkit-user-select: none;
+  user-select: none;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ─── Phenomenon strip ────────────────────────────────────── */
+
+.phenomenon-strip {
+  background: var(--c-gold);
+  color: var(--c-ground);
+  overflow: hidden;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+}
+
+/* Aspect must match the 1440x120 viewBox or the SVG letterboxes and the
+   marquee stops reaching the edges. The glyphs only occupy y 27-115 of that
+   box, so negative margins trim the empty bands instead — a thinner strip
+   with nothing clipped. Margin percentages resolve against width. */
+.phenomenon-strip .curved-loop-svg {
+  aspect-ratio: 1440 / 120;
+  margin-top: -1.2%;
+  margin-bottom: -0.3%;
 }

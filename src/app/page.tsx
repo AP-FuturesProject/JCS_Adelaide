@@ -3,6 +3,7 @@ import VideoSection from "@/components/VideoSection";
 import InstagramFeed from "@/components/InstagramFeed";
 import MeetTheTeam from "@/components/MeetTheTeam";
 import SiteFooter from "@/components/SiteFooter";
+import CurvedLoop from "@/components/CurvedLoop";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 import SpecularButton from "@/components/SpecularButton";
@@ -106,6 +107,27 @@ export default function Home() {
         </div>
       </main>
       <MeetTheTeam />
+      <div className="phenomenon-strip">
+        <CurvedLoop
+          marqueeText="THE WORLD-WIDE PHENOMENON"
+          /* "line" rather than "arc": with curveAmount 0 both draw a straight
+             path, but arc sits at y=40 of a 120 viewBox and overflows upward,
+             while line is positioned to sit inside it. */
+          shape="line"
+          speed={1.4}
+          curveAmount={0}
+          direction="left"
+          fontSize={96}
+          fontWeight={700}
+          letterSpacing={-6}
+          separator="—"
+          outline={false}
+          scrollBoost={0.5}
+          edgeFade={0.7}
+          interactive
+          pauseOnHover={false}
+        />
+      </div>
       <InstagramFeed />
       <SiteFooter />
     </>
