@@ -3,12 +3,12 @@
 import ProfileCard from "@/components/ProfileCard";
 
 const TEAM = [
-  { name: "To Be Announced", title: "Director" },
-  { name: "To Be Announced", title: "Musical Director" },
-  { name: "To Be Announced", title: "Producer" },
-  { name: "To Be Announced", title: "Choreographer" },
-  { name: "To Be Announced", title: "Vocal Coach" },
-  { name: "To Be Announced", title: "Stage Manager" },
+  { name: "Georgie Harris", title: "Director", photo: "georgie-harris" },
+  { name: "Aaron Deanshaw", title: "Music Director", photo: "aaron-deanshaw" },
+  { name: "Angela Portolesi", title: "Vocal Director", photo: "angela-portolesi" },
+  { name: "Shona Tostevin", title: "Assistant Vocal Director", photo: "shona-tostevin" },
+  { name: "Maddie Apacible", title: "Choreographer", photo: "maddie-apacible" },
+  { name: "Danny Bilan", title: "Creative Producer", photo: "danny-bilan" },
 ];
 
 export default function MeetTheTeam() {
@@ -18,10 +18,11 @@ export default function MeetTheTeam() {
       <div className="team-grid">
         {TEAM.map(member => (
           <ProfileCard
-            key={member.title}
+            key={member.name}
             className="team-card"
             name={member.name}
             title={member.title}
+            avatarUrl={`/team/${member.photo}.webp`}
             iconUrl="/jcs-icon.webp"
             holo={0.5}
             glare={0.35}

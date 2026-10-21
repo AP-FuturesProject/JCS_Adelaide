@@ -597,6 +597,14 @@ behold-widget {
   }
 }
 
+/* Cutouts vary from 0.53 to 0.84 aspect against a 0.8 tile, so "cover"
+   would crop heads off the narrow ones. Fit the whole subject, stood on
+   the bottom edge; the holo shows through the transparency around them. */
+.team-card .profile-card__photo {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
 /* The JCS mark is a single monogram, not a tiling pattern, so it gets
    centred at a readable size instead of the vendor's 180% tiled default. */
 .team-card .profile-card__holo {
