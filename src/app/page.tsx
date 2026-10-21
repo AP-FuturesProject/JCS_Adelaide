@@ -1,6 +1,7 @@
 import Image from "next/image";
 import VideoSection from "@/components/VideoSection";
 import InstagramFeed from "@/components/InstagramFeed";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 
@@ -26,7 +27,7 @@ export default function Home() {
         </div>
         <div className="spotlight" aria-hidden="true" />
         <div className="content">
-          <p className="location">Adelaide</p>
+          <p className="location">Adelaide, South Australia</p>
           <div className="logo-wrap">
             <Image
               src="/jcs-logo.png"
@@ -70,6 +71,7 @@ export default function Home() {
         </div>
       </main>
       <VideoSection />
+      <MeetTheTeam />
       <InstagramFeed />
     </>
   );
