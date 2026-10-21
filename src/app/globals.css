@@ -1234,3 +1234,85 @@ body {
   align-items: center;
   gap: inherit;
 }
+
+/* ─── Footer ──────────────────────────────────────────────── */
+
+.site-footer {
+  background: #070605;
+  border-top: 1px solid rgba(201, 168, 76, 0.16);
+  padding: 3rem 1.5rem;
+  padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .site-footer {
+    padding: 4rem 2rem 3.5rem;
+  }
+}
+
+.footer-mark {
+  width: clamp(48px, 12vw, 64px);
+  height: auto;
+  opacity: 0.75;
+}
+
+.footer-show {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.footer-show-sub {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.62rem, 2vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.75rem;
+}
+
+.footer-nav a {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  text-decoration: none;
+  /* 44px keeps these tappable on a phone; the text still sits tight visually */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--c-gold);
+}
+
+.footer-legal {
+  margin: 0;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.6rem, 1.9vw, 0.72rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 235, 225, 0.32);
+}

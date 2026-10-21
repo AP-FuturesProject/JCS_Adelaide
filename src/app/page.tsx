@@ -2,6 +2,7 @@ import Image from "next/image";
 import VideoSection from "@/components/VideoSection";
 import InstagramFeed from "@/components/InstagramFeed";
 import MeetTheTeam from "@/components/MeetTheTeam";
+import SiteFooter from "@/components/SiteFooter";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 import SpecularButton from "@/components/SpecularButton";
@@ -90,6 +91,7 @@ export default function Home() {
       </main>
       <MeetTheTeam />
       <InstagramFeed />
+      <SiteFooter />
     </>
   );
 }
