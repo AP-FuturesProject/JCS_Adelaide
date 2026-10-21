@@ -92,7 +92,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spotlight { animation: none; }
+  .spotlight,
+  .logo-wrap::after { animation: none; }
 }
 
 /* ─── Content ─────────────────────────────────────────────── */
@@ -140,6 +141,33 @@ body {
 
 .logo-wrap {
   width: min(860px, 90vw);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-wrap::after {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: -60%;
+  width: 35%;
+  height: 110%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 100%
+  );
+  transform: skewX(-12deg);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: logo-glint 6s ease-in-out infinite;
+}
+
+@keyframes logo-glint {
+  0%, 72%  { left: -60%;  opacity: 0; }
+  76%      { left: -60%;  opacity: 0.9; }
+  100%     { left: 135%;  opacity: 0; }
 }
 
 .logo-img {
