@@ -45,6 +45,7 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
 
   return (
     <div className="ig-carousel">
+      <div className="ig-phone-clip">
       <div className="ig-phone">
         <div className="ig-phone-screen">
       <div
@@ -119,6 +120,7 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
           <path d="m9 5 7 7-7 7" />
         </svg>
       </button>
+      </div>
       </div>
     </div>
   );
