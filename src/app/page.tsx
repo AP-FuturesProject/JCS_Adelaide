@@ -4,6 +4,7 @@ import InstagramFeed from "@/components/InstagramFeed";
 import MeetTheTeam from "@/components/MeetTheTeam";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
+import SpecularButton from "@/components/SpecularButton";
 
 export default function Home() {
   return (
@@ -60,17 +61,32 @@ export default function Home() {
             padTo={11}
             intro
           />
-          <a
+          <SpecularButton
             href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
             target="_blank"
             rel="noopener noreferrer"
-            className="audition-btn"
+            className="auditions-cta"
+            size="lg"
+            radius={18}
+            tint="#ffffff"
+            tintOpacity={0.04}
+            textColor="#f5f5f5"
+            lineColor="#ffffff"
+            baseColor="#525252"
+            intensity={1}
+            idleIntensity={0.35}
+            shineSize={10}
+            shineFade={34}
+            thickness={1.2}
+            glow={1}
+            followMouse
+            proximity={250}
           >
             Cast &amp; Crew Auditions
-          </a>
+          </SpecularButton>
+          <VideoSection />
         </div>
       </main>
-      <VideoSection />
       <MeetTheTeam />
       <InstagramFeed />
     </>
