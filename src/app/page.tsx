@@ -4,6 +4,7 @@ import InstagramFeed from "@/components/InstagramFeed";
 import MeetTheTeam from "@/components/MeetTheTeam";
 import SiteFooter from "@/components/SiteFooter";
 import CurvedLoop from "@/components/CurvedLoop";
+import LogoReveal from "@/components/LogoReveal";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 import SpecularButton from "@/components/SpecularButton";
@@ -53,7 +54,7 @@ export default function Home() {
         </div>
         <div className="spotlight" aria-hidden="true" />
         <div className="content">
-          <div className="logo-wrap">
+          <LogoReveal>
             <Image
               src="/jcs-logo.png"
               alt="Jesus Christ Superstar"
@@ -62,7 +63,7 @@ export default function Home() {
               priority
               className="logo-img"
             />
-          </div>
+          </LogoReveal>
           <SplitFlapText
             className="date-board"
             words={['EASTER 2027']}

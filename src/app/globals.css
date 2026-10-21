@@ -1447,3 +1447,52 @@ body {
 .phenomenon-strip .curved-loop-svg {
   height: clamp(38px, 3.8vw, 54px);
 }
+
+/* ─── Logo easter egg ─────────────────────────────────────── */
+
+.logo-wrap {
+  cursor: pointer;
+}
+
+.logo-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.94);
+  cursor: pointer;
+  animation: logo-reveal-in 240ms ease-out both;
+}
+
+.logo-reveal.is-out {
+  animation: logo-reveal-out 700ms ease-in both;
+}
+
+/* FuzzyText paints to a canvas, and canvas text cannot resolve a CSS
+   variable — so Anton has to arrive through the font it inherits here,
+   which is what fontFamily="inherit" reads. */
+.logo-reveal__text {
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  color: var(--c-text);
+  max-width: 100%;
+}
+
+@keyframes logo-reveal-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes logo-reveal-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-reveal,
+  .logo-reveal.is-out {
+    animation-duration: 1ms;
+  }
+}
