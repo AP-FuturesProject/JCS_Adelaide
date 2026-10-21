@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel_Decorative, Cormorant_Garamond } from "next/font/google";
+import { Anton, Cinzel_Decorative, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const cinzel = Cinzel_Decorative({
   variable: "--font-cinzel",
   subsets: ["latin"],
   weight: ["400", "700", "900"],
+});
+
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 const cormorant = Cormorant_Garamond({
@@ -38,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${cinzel.variable} ${cormorant.variable}`}>
+      <body className={`${cinzel.variable} ${cormorant.variable} ${anton.variable}`}>
         {children}
       </body>
     </html>

@@ -24,7 +24,8 @@ export default function MeetTheTeam() {
             title={member.title}
             avatarUrl={`/team/${member.photo}.webp`}
             iconUrl="/jcs-icon.webp"
-            holo={0.5}
+            backdropColor="#e8e8ea"
+            holo={0.7}
             glare={0.35}
             tiltStrength={7}
             parallax={10}

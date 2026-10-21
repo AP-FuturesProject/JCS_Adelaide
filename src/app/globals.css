@@ -574,13 +574,43 @@ behold-widget {
 
 .team-heading {
   margin: 0;
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.5rem, 5vw, 2.25rem);
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--c-gold);
   text-align: center;
+}
+
+.team-card .profile-card__name {
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.team-card .profile-card__title {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* The vendor scrim is tuned for a dark tile; on light grey it leaves the
+   name sitting on near-white, so it needs to carry the contrast itself. */
+.team-card .profile-card__scrim {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.8) 8%,
+    rgba(0, 0, 0, 0.66) 16%,
+    rgba(0, 0, 0, 0.46) 25%,
+    rgba(0, 0, 0, 0.26) 34%,
+    rgba(0, 0, 0, 0.1) 43%,
+    rgba(0, 0, 0, 0) 52%
+  );
 }
 
 .team-grid {
@@ -605,13 +635,13 @@ behold-widget {
   object-position: center bottom;
 }
 
-/* The JCS mark is a single monogram, not a tiling pattern, so it gets
-   centred at a readable size instead of the vendor's 180% tiled default. */
+/* Tile the JCS mark small enough to read as a repeating foil pattern behind
+   the subject; the vendor's 180% default crops one mark into noise. */
 .team-card .profile-card__holo {
-  -webkit-mask-size: 76% auto;
-  mask-size: 76% auto;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  -webkit-mask-size: 26% auto;
+  mask-size: 26% auto;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
   -webkit-mask-position: calc(50% - var(--pc-shift-x) * 1.5) calc(50% - var(--pc-shift-y) * 1.5);
   mask-position: calc(50% - var(--pc-shift-x) * 1.5) calc(50% - var(--pc-shift-y) * 1.5);
 }
