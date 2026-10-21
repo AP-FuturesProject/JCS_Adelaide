@@ -313,16 +313,49 @@ body {
 
 .ig-carousel {
   position: relative;
-  width: min(420px, 88vw);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Frame is 429x882 with the screen cut out; the inset values below are
+   measured from that PNG, so they track the artwork rather than guesswork. */
+.ig-phone {
+  position: relative;
+  width: min(320px, 78vw);
+  aspect-ratio: 429 / 882;
+}
+
+.ig-phone-screen {
+  position: absolute;
+  left: 4.662%;
+  top: 7.03%;
+  width: 90.676%;
+  height: 91.157%;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  border-radius: 7%/3.4%;
+  overflow: hidden;
+}
+
+.ig-phone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .ig-track {
   display: flex;
+  flex: none;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  border-radius: 4px;
   outline: none;
   /* iOS keeps vertical page scroll usable while the track pages sideways. */
   touch-action: pan-y pinch-zoom;
@@ -354,14 +387,15 @@ body {
   -webkit-user-select: none;
 }
 
+/* 34.6% lines these up with the middle of the 4:5 post, not the whole phone. */
 .ig-arrow {
   position: absolute;
-  top: 50%;
+  top: 34.6%;
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   padding: 0;
   border: 1px solid rgba(201, 168, 76, 0.35);
   border-radius: 50%;
@@ -374,11 +408,11 @@ body {
 }
 
 .ig-arrow--prev {
-  left: 0.5rem;
+  left: 7%;
 }
 
 .ig-arrow--next {
-  right: 0.5rem;
+  right: 7%;
 }
 
 .ig-arrow:disabled {
@@ -390,11 +424,15 @@ body {
   background: rgba(13, 11, 9, 0.9);
 }
 
+/* Lives inside the phone screen, filling the space the post leaves below it. */
 .ig-dots {
+  flex: 1;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin: 0;
+  padding-top: 1.1rem;
 }
 
 .ig-dot {
