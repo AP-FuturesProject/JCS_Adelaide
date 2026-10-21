@@ -2,11 +2,36 @@ import Image from "next/image";
 import VideoSection from "@/components/VideoSection";
 import InstagramFeed from "@/components/InstagramFeed";
 import MeetTheTeam from "@/components/MeetTheTeam";
+import SiteFooter from "@/components/SiteFooter";
+import CurvedLoop from "@/components/CurvedLoop";
 import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 import SpecularButton from "@/components/SpecularButton";
 
+// Midnight Sunday 25 Oct 2026 in Adelaide, which is ACDT (UTC+10:30) by then.
+// Pinned as a UTC instant so the build server's own timezone can't shift it.
+const AUDITIONS_CLOSE = Date.parse("2026-10-24T13:30:00Z");
+
+const CTA_LOOK = {
+  className: "auditions-cta",
+  size: "lg" as const,
+  radius: 18,
+  tint: "#ffffff",
+  tintOpacity: 0.04,
+  textColor: "#f5f5f5",
+  lineColor: "#ffffff",
+  baseColor: "#525252",
+  intensity: 1,
+  idleIntensity: 0.35,
+  shineSize: 10,
+  shineFade: 34,
+  thickness: 1.2,
+  glow: 1,
+};
+
 export default function Home() {
+  const auditionsOpen = Date.now() < AUDITIONS_CLOSE;
+
   return (
     <>
       <main className="stage">
@@ -44,7 +69,8 @@ export default function Home() {
             words={['EASTER 2027']}
             flipDuration={0.09}
             stagger={0.035}
-            cycleDelay={15000}
+            cycleDelay={20000}
+            flickerEvery={1500}
             charset="alphanumeric"
             flipsPerChar={10}
             order="random"
@@ -56,40 +82,61 @@ export default function Home() {
             depth={0.55}
             tileRadius={3}
             gap={3}
-            fontSize={32}
+            fontSize="clamp(19px, 5.8vw, 32px)"
             loop
             padTo={11}
             intro
           />
           <p className="venue">Futures Event Centre &middot; Paradise</p>
-          <SpecularButton
-            href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="auditions-cta"
-            size="lg"
-            radius={18}
-            tint="#ffffff"
-            tintOpacity={0.04}
-            textColor="#f5f5f5"
-            lineColor="#ffffff"
-            baseColor="#525252"
-            intensity={1}
-            idleIntensity={0.35}
-            shineSize={10}
-            shineFade={34}
-            thickness={1.2}
-            glow={1}
-            followMouse
-            proximity={250}
-          >
-            Cast &amp; Crew Auditions
-          </SpecularButton>
           <VideoSection />
+          {auditionsOpen ? (
+            <SpecularButton
+              {...CTA_LOOK}
+              href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
+              target="_blank"
+              rel="noopener noreferrer"
+              followMouse
+              proximity={250}
+            >
+              Cast &amp; Crew Auditions
+            </SpecularButton>
+          ) : (
+            <SpecularButton {...CTA_LOOK} disabled>
+              More Info Coming Soon
+            </SpecularButton>
+          )}
         </div>
       </main>
       <MeetTheTeam />
+      <div className="phenomenon-strip">
+        <CurvedLoop
+          marqueeText="THE WORLD-WIDE PHENOMENON"
+          /* "line" rather than "arc": with curveAmount 0 both draw a straight
+             path, but arc sits at y=40 of a 120 viewBox and overflows upward,
+             while line is positioned to sit inside it. */
+          shape="line"
+          speed={1.4}
+          curveAmount={0}
+          direction="left"
+          fontSize={42}
+          fontWeight={700}
+          letterSpacing={1}
+          /* Crops rather than letterboxing, and keeps the line centred in the
+             strip at any height. The wide viewWidth keeps the height term
+             dominant in slice's max(w/viewWidth, h/120), so the text tracks
+             the strip's height instead of growing with the viewport. */
+          preserveAspectRatio="xMidYMid slice"
+          viewWidth={4800}
+          separator="•"
+          outline={false}
+          scrollBoost={0.5}
+          edgeFade={0.7}
+          interactive
+          pauseOnHover={false}
+        />
+      </div>
       <InstagramFeed />
+      <SiteFooter />
     </>
   );
 }

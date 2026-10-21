@@ -45,6 +45,13 @@ body {
   padding-bottom: max(3rem, env(safe-area-inset-bottom, 0px));
 }
 
+/* Phones need real headroom above the logo or the hero reads top-heavy. */
+@media (max-width: 639px) {
+  .stage {
+    padding-top: max(5.5rem, calc(4rem + env(safe-area-inset-top, 0px)));
+  }
+}
+
 /* ─── Light rays background ───────────────────────────────── */
 
 .light-rays-bg {
@@ -109,15 +116,16 @@ body {
   width: 100%;
 }
 
+/* Sits above the logo, so it stays a quiet label — the logo carries the page. */
 .location {
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: 0.32em;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.62rem, 2vw, 0.9rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #e9d6a0;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.75);
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
 }
 
 /* Compound selector so it beats .split-flap-text, which sets its own face
@@ -128,36 +136,26 @@ body {
 }
 
 .date-board {
-  margin-top: 2.75rem;
+  margin-top: clamp(1.6rem, 5vw, 2.75rem);
 }
 
+/* A fine print detail under the date, deliberately the smallest thing here. */
 .venue {
-  margin: 1.35rem 0 0;
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(0.8rem, 2.3vw, 0.95rem);
-  font-weight: 500;
-  letter-spacing: 0.26em;
+  margin: clamp(0.8rem, 2.5vw, 1.1rem) 0 0;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.56rem, 1.8vw, 0.72rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--c-gold-muted);
+  color: rgba(201, 168, 76, 0.42);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   text-align: center;
-}
-
-.coming-soon {
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.05rem, 4vw, 1.7rem);
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: clamp(0.18em, 1.5vw, 0.5em);
-  text-transform: uppercase;
-  color: var(--c-text);
-  white-space: nowrap;
 }
 
 /* ─── Logo ────────────────────────────────────────────────── */
 
 .logo-wrap {
-  width: min(860px, 90vw);
+  width: min(860px, 94vw);
   position: relative;
 }
 
@@ -202,12 +200,18 @@ body {
 /* Needs to out-specify .specular-button, which sets margin and font itself and
    is defined later. The specular canvas bleeds 24px past the button, so the
    gap has to clear that as well as the board above it. */
+/* Once auditions close this renders disabled. The vendor's 0.5 opacity reads
+   as broken on the dark hero, so it stays legible and simply inert. */
+.specular-button.auditions-cta:disabled {
+  opacity: 0.85;
+}
+
 .specular-button.auditions-cta {
-  margin-top: 2.75rem;
+  margin-top: clamp(1.75rem, 5vw, 2.75rem);
   max-width: 90vw;
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.9rem, 2.5vw, 1rem);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
@@ -218,15 +222,9 @@ body {
 /* Sits inside the hero, so it stays transparent and lets the rays through. */
 .video-section {
   width: 100%;
-  margin-top: 2.75rem;
+  margin-top: clamp(2rem, 6vw, 3.5rem);
   display: flex;
   justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .video-section {
-    margin-top: 3.5rem;
-  }
 }
 
 .video-wrap {
@@ -245,10 +243,10 @@ body {
 
 /* ─── Instagram feed ──────────────────────────────────────── */
 
+/* No bottom padding: the clipped phone runs straight into the footer. */
 .ig-section {
   background: #0d0b09;
-  padding: 2.5rem 1rem;
-  padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  padding: 2.5rem 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -258,7 +256,7 @@ body {
 
 @media (min-width: 640px) {
   .ig-section {
-    padding: 4rem 2rem 5rem;
+    padding: 4rem 2rem 0;
     gap: 1.75rem;
   }
 }
@@ -280,7 +278,7 @@ body {
 
 .ig-sub {
   margin: 0 0 1.25rem;
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.9rem, 2.6vw, 1.05rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -304,16 +302,67 @@ body {
 
 .ig-carousel {
   position: relative;
-  width: min(420px, 88vw);
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
+/* Shows the top 64.6% of the phone and clips the rest, so the mockup runs off
+   the bottom of the section just below the dots and into the footer.
+   429/570 is that visible slice of the full 429x882 frame. */
+.ig-phone-clip {
+  position: relative;
+  width: min(320px, 78vw);
+  aspect-ratio: 429 / 570;
+  overflow: hidden;
+}
+
+/* Frame is 429x882 with the screen cut out; the inset values below are
+   measured from that PNG, so they track the artwork rather than guesswork. */
+.ig-phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 429 / 882;
+}
+
+.ig-phone-screen {
+  position: absolute;
+  left: 4.662%;
+  top: 7.03%;
+  width: 90.676%;
+  height: 91.157%;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  border-radius: 7%/3.4%;
+  overflow: hidden;
+  /* Percentage padding resolves against width, so 7.9% of the screen's width
+     clears the island, which sits in the bezel directly above the cut-out. */
+  padding-top: 7.9%;
+}
+
+.ig-phone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 85% of the screen width — a 15% reduction on filling it edge to edge. */
 .ig-track {
   display: flex;
+  flex: none;
+  width: 85%;
+  margin-inline: auto;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  border-radius: 4px;
   outline: none;
   /* iOS keeps vertical page scroll usable while the track pages sideways. */
   touch-action: pan-y pinch-zoom;
@@ -345,14 +394,15 @@ body {
   -webkit-user-select: none;
 }
 
+/* 33.9% lines these up with the middle of the 4:5 post, not the whole phone. */
 .ig-arrow {
   position: absolute;
-  top: 50%;
+  top: 33.9%;
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   padding: 0;
   border: 1px solid rgba(201, 168, 76, 0.35);
   border-radius: 50%;
@@ -365,11 +415,11 @@ body {
 }
 
 .ig-arrow--prev {
-  left: 0.5rem;
+  left: 11.5%;
 }
 
 .ig-arrow--next {
-  right: 0.5rem;
+  right: 11.5%;
 }
 
 .ig-arrow:disabled {
@@ -381,11 +431,15 @@ body {
   background: rgba(13, 11, 9, 0.9);
 }
 
+/* Lives inside the phone screen, filling the space the post leaves below it. */
 .ig-dots {
+  flex: 1;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin: 0;
+  padding-top: 1.1rem;
 }
 
 .ig-dot {
@@ -687,8 +741,13 @@ body {
 
 /* ─── Meet the team ───────────────────────────────────────── */
 
+/* Grain sits in ::before. It is absolutely positioned, which also takes it
+   out of the flex flow it would otherwise join as a stray item. */
 .team-section {
-  background: #121110;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ca1415;
   padding: 2.5rem 1rem;
   display: flex;
   flex-direction: column;
@@ -703,6 +762,43 @@ body {
   }
 }
 
+.team-section::before {
+  content: '';
+  position: absolute;
+  /* Oversized so the drift never pulls an edge into view. */
+  inset: -25%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  opacity: 0.26;
+  mix-blend-mode: overlay;
+  animation: team-grain 0.7s steps(5) infinite;
+}
+
+/* Stepped rather than eased, so it reads as film grain instead of a slide. */
+@keyframes team-grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3%, 2%); }
+  40%  { transform: translate(2%, -3%); }
+  60%  { transform: translate(-2%, -2%); }
+  80%  { transform: translate(3%, 1%); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-section::before { animation: none; }
+}
+
+/* Above the grain layer. */
+.team-heading,
+.team-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gold would sit too close to the red ground to read, so this one goes cream. */
 .team-heading {
   margin: 0;
   font-family: var(--font-anton), "Anton", Impact, sans-serif;
@@ -710,7 +806,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--c-gold);
+  color: var(--c-text);
   text-align: center;
 }
 
@@ -1229,4 +1325,129 @@ body {
   display: inline-flex;
   align-items: center;
   gap: inherit;
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+
+/* No rule above it, so the clipped phone reads as running off the page
+   rather than hitting a divider. */
+.site-footer {
+  background: #000;
+  padding: 3rem 1.5rem;
+  padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .site-footer {
+    padding: 4rem 2rem 3.5rem;
+  }
+}
+
+.footer-mark {
+  width: clamp(48px, 12vw, 64px);
+  height: auto;
+  opacity: 0.75;
+}
+
+.footer-show-sub {
+  margin: 0;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.62rem, 2vw, 0.78rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.5);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.75rem;
+}
+
+.footer-nav a {
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  text-decoration: none;
+  /* 44px keeps these tappable on a phone; the text still sits tight visually */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--c-gold);
+}
+
+/* No uppercase transform here: the licensor's name is cased deliberately
+   (ORiGiN), and transforming it would misprint a contractual credit. */
+.footer-licence {
+  margin: 0;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.64rem, 2vw, 0.78rem);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  color: rgba(240, 235, 225, 0.6);
+}
+
+.footer-legal {
+  margin: 0;
+  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.6rem, 1.9vw, 0.72rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 235, 225, 0.32);
+}
+
+/* ─── CurvedLoop (react-bits) ─────────────────────────────── */
+
+/* The vendor stylesheet gives the jacket min-height: 100vh, which is sized
+   for a full-screen hero rather than a divider strip. */
+.curved-loop-jacket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  display: block;
+  overflow: visible;
+  fill: currentColor;
+  -webkit-user-select: none;
+  user-select: none;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ─── Phenomenon strip ────────────────────────────────────── */
+
+.phenomenon-strip {
+  background: var(--c-gold);
+  color: var(--c-ground);
+  overflow: hidden;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+}
+
+/* With "slice" the SVG covers the box and crops the spare band instead of
+   letterboxing, so the height can be set directly. xMidYMid keeps user y=60 —
+   which is where "line" centres the glyphs — on the strip's centre line.
+   The clamp stops it collapsing to a sliver on phones. */
+.phenomenon-strip .curved-loop-svg {
+  height: clamp(38px, 3.8vw, 54px);
 }

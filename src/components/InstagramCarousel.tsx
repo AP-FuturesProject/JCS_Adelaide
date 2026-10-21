@@ -45,6 +45,9 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
 
   return (
     <div className="ig-carousel">
+      <div className="ig-phone-clip">
+      <div className="ig-phone">
+        <div className="ig-phone-screen">
       <div
         className="ig-track"
         ref={trackRef}
@@ -79,6 +82,22 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
         ))}
       </div>
 
+          <div className="ig-dots">
+            {posts.map((post, i) => (
+              <button
+                key={post.id}
+                type="button"
+                className={`ig-dot${i === index ? " is-active" : ""}`}
+                onClick={() => goTo(i)}
+                aria-label={`Go to post ${i + 1}`}
+                aria-current={i === index}
+              />
+            ))}
+          </div>
+        </div>
+
+        <img className="ig-phone-frame" src="/phone-frame.png" alt="" aria-hidden="true" />
+
       <button
         type="button"
         className="ig-arrow ig-arrow--prev"
@@ -101,18 +120,7 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
           <path d="m9 5 7 7-7 7" />
         </svg>
       </button>
-
-      <div className="ig-dots">
-        {posts.map((post, i) => (
-          <button
-            key={post.id}
-            type="button"
-            className={`ig-dot${i === index ? " is-active" : ""}`}
-            onClick={() => goTo(i)}
-            aria-label={`Go to post ${i + 1}`}
-            aria-current={i === index}
-          />
-        ))}
+      </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Cinzel_Decorative, Cormorant_Garamond } from "next/font/google";
+import { Anton, Cinzel_Decorative, Questrial } from "next/font/google";
 import "./globals.css";
 
 const cinzel = Cinzel_Decorative({
@@ -14,11 +14,10 @@ const anton = Anton({
   weight: ["400"],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const questrial = Questrial({
+  variable: "--font-questrial",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -44,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${cinzel.variable} ${cormorant.variable} ${anton.variable}`}>
+      <body className={`${cinzel.variable} ${questrial.variable} ${anton.variable}`}>
         {children}
       </body>
     </html>
