@@ -61,6 +61,7 @@ export default function Home() {
             padTo={11}
             intro
           />
+          <p className="venue">Futures Event Centre &middot; Paradise</p>
           <SpecularButton
             href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
             target="_blank"

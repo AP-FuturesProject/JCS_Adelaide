@@ -120,8 +120,27 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Compound selector so it beats .split-flap-text, which sets its own face
+   and is defined later. Anton ships one weight, so no synthetic bold. */
+.split-flap-text.date-board {
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-weight: 400;
+}
+
 .date-board {
   margin-top: 2.75rem;
+}
+
+.venue {
+  margin: 1.35rem 0 0;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.8rem, 2.3vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--c-gold-muted);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  text-align: center;
 }
 
 .coming-soon {
@@ -184,7 +203,7 @@ body {
    is defined later. The specular canvas bleeds 24px past the button, so the
    gap has to clear that as well as the board above it. */
 .specular-button.auditions-cta {
-  margin-top: 3.5rem;
+  margin-top: 2.75rem;
   max-width: 90vw;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   font-size: clamp(0.9rem, 2.5vw, 1rem);
@@ -244,21 +263,145 @@ body {
   }
 }
 
-.ig-label {
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: 0.75rem;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--c-gold-muted);
+.ig-section {
+  gap: 0.75rem;
 }
 
-behold-widget {
-  width: min(720px, 100%);
-  max-width: 100%;
+.ig-heading {
+  margin: 0;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  text-align: center;
+}
+
+.ig-sub {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.9rem, 2.6vw, 1.05rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-gold-muted);
+  text-align: center;
+}
+
+.ig-link {
+  color: var(--c-gold);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+
+.ig-link:hover {
+  color: #e9d6a0;
+}
+
+/* ─── Instagram carousel ──────────────────────────────────── */
+
+.ig-carousel {
+  position: relative;
+  width: min(420px, 88vw);
+}
+
+.ig-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-radius: 4px;
+  outline: none;
+  /* iOS keeps vertical page scroll usable while the track pages sideways. */
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior-x: contain;
+}
+
+.ig-track::-webkit-scrollbar {
+  display: none;
+}
+
+.ig-track:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 3px;
+}
+
+.ig-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: block;
-  overflow: hidden;
+  line-height: 0;
+}
+
+.ig-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ig-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 50%;
+  background: rgba(13, 11, 9, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--c-gold);
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.ig-arrow--prev {
+  left: 0.5rem;
+}
+
+.ig-arrow--next {
+  right: 0.5rem;
+}
+
+.ig-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.ig-arrow:not(:disabled):hover {
+  background: rgba(13, 11, 9, 0.9);
+}
+
+.ig-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ig-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.3);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ig-dot.is-active {
+  background: var(--c-gold);
+  transform: scale(1.3);
 }
 
 /* ─── Split Flap Text ─────────────────────────────────────── */
