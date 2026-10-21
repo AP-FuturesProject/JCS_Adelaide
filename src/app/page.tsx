@@ -56,12 +56,13 @@ export default function Home() {
             depth={0.55}
             tileRadius={3}
             gap={3}
-            fontSize={32}
+            fontSize="clamp(19px, 5.8vw, 32px)"
             loop
             padTo={11}
             intro
           />
           <p className="venue">Futures Event Centre &middot; Paradise</p>
+          <VideoSection />
           <SpecularButton
             href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
             target="_blank"
@@ -85,7 +86,6 @@ export default function Home() {
           >
             Cast &amp; Crew Auditions
           </SpecularButton>
-          <VideoSection />
         </div>
       </main>
       <MeetTheTeam />
