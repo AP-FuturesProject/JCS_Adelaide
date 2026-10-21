@@ -40,8 +40,10 @@ body {
   justify-content: center;
   overflow: hidden;
   padding: 3rem 1.5rem;
-  /* safe area for notched phones */
-  padding-top: max(3rem, env(safe-area-inset-top, 0px));
+  /* The logo leads the page now that the eyebrow is gone, so it needs its own
+     headroom. Tied to viewport height so short laptops don't lose the fold.
+     Also the safe area for notched phones. */
+  padding-top: max(clamp(4.5rem, 11vh, 9rem), env(safe-area-inset-top, 0px));
   padding-bottom: max(3rem, env(safe-area-inset-bottom, 0px));
 }
 
@@ -116,17 +118,7 @@ body {
   width: 100%;
 }
 
-/* Sits above the logo, so it stays a quiet label — the logo carries the page. */
-.location {
-  font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(0.62rem, 2vw, 0.9rem);
-  font-weight: 400;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #e9d6a0;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.75);
-  margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
-}
+
 
 /* Compound selector so it beats .split-flap-text, which sets its own face
    and is defined later. Anton ships one weight, so no synthetic bold. */
@@ -139,8 +131,12 @@ body {
   margin-top: clamp(1.6rem, 5vw, 2.75rem);
 }
 
-/* A fine print detail under the date, deliberately the smallest thing here. */
+/* Fine print under the date — venue then city, deliberately the smallest
+   thing here so the logo keeps the hierarchy. */
 .venue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
   margin: clamp(0.8rem, 2.5vw, 1.1rem) 0 0;
   font-family: var(--font-questrial), "Questrial", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.56rem, 1.8vw, 0.72rem);
