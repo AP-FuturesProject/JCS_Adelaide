@@ -211,6 +211,12 @@ body {
 /* Needs to out-specify .specular-button, which sets margin and font itself and
    is defined later. The specular canvas bleeds 24px past the button, so the
    gap has to clear that as well as the board above it. */
+/* Once auditions close this renders disabled. The vendor's 0.5 opacity reads
+   as broken on the dark hero, so it stays legible and simply inert. */
+.specular-button.auditions-cta:disabled {
+  opacity: 0.85;
+}
+
 .specular-button.auditions-cta {
   margin-top: clamp(1.75rem, 5vw, 2.75rem);
   max-width: 90vw;
@@ -1261,23 +1267,13 @@ body {
   opacity: 0.75;
 }
 
-.footer-show {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  font-family: var(--font-anton), "Anton", Impact, sans-serif;
-  font-size: clamp(1rem, 4vw, 1.35rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-gold);
-}
-
 .footer-show-sub {
+  margin: 0;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   font-size: clamp(0.62rem, 2vw, 0.78rem);
   font-weight: 500;
   letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: rgba(201, 168, 76, 0.5);
 }
 

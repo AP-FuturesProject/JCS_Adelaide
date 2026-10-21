@@ -7,7 +7,30 @@ import LightRays from "@/components/LightRays";
 import SplitFlapText from "@/components/SplitFlapText";
 import SpecularButton from "@/components/SpecularButton";
 
+// Midnight Sunday 25 Oct 2026 in Adelaide, which is ACDT (UTC+10:30) by then.
+// Pinned as a UTC instant so the build server's own timezone can't shift it.
+const AUDITIONS_CLOSE = Date.parse("2026-10-24T13:30:00Z");
+
+const CTA_LOOK = {
+  className: "auditions-cta",
+  size: "lg" as const,
+  radius: 18,
+  tint: "#ffffff",
+  tintOpacity: 0.04,
+  textColor: "#f5f5f5",
+  lineColor: "#ffffff",
+  baseColor: "#525252",
+  intensity: 1,
+  idleIntensity: 0.35,
+  shineSize: 10,
+  shineFade: 34,
+  thickness: 1.2,
+  glow: 1,
+};
+
 export default function Home() {
+  const auditionsOpen = Date.now() < AUDITIONS_CLOSE;
+
   return (
     <>
       <main className="stage">
@@ -64,29 +87,22 @@ export default function Home() {
           />
           <p className="venue">Futures Event Centre &middot; Paradise</p>
           <VideoSection />
-          <SpecularButton
-            href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="auditions-cta"
-            size="lg"
-            radius={18}
-            tint="#ffffff"
-            tintOpacity={0.04}
-            textColor="#f5f5f5"
-            lineColor="#ffffff"
-            baseColor="#525252"
-            intensity={1}
-            idleIntensity={0.35}
-            shineSize={10}
-            shineFade={34}
-            thickness={1.2}
-            glow={1}
-            followMouse
-            proximity={250}
-          >
-            Cast &amp; Crew Auditions
-          </SpecularButton>
+          {auditionsOpen ? (
+            <SpecularButton
+              {...CTA_LOOK}
+              href="https://futuresaustralia.churchcenter.com/registrations/events/3694286"
+              target="_blank"
+              rel="noopener noreferrer"
+              followMouse
+              proximity={250}
+            >
+              Cast &amp; Crew Auditions
+            </SpecularButton>
+          ) : (
+            <SpecularButton {...CTA_LOOK} disabled>
+              More Info Coming Soon
+            </SpecularButton>
+          )}
         </div>
       </main>
       <MeetTheTeam />
