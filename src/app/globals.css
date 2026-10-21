@@ -40,8 +40,10 @@ body {
   justify-content: center;
   overflow: hidden;
   padding: 3rem 1.5rem;
-  /* safe area for notched phones */
-  padding-top: max(3rem, env(safe-area-inset-top, 0px));
+  /* The logo leads the page now that the eyebrow is gone, so it needs its own
+     headroom. Tied to viewport height so short laptops don't lose the fold.
+     Also the safe area for notched phones. */
+  padding-top: max(clamp(4.5rem, 11vh, 9rem), env(safe-area-inset-top, 0px));
   padding-bottom: max(3rem, env(safe-area-inset-bottom, 0px));
 }
 
