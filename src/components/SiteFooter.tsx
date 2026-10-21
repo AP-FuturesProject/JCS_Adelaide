@@ -32,6 +32,13 @@ export default function SiteFooter() {
         </a>
       </nav>
 
+      {/* Billing wording is contractual — reproduce it verbatim, casing included. */}
+      <p className="footer-licence">
+        By arrangement with ORiGiN&trade; THEATRICAL
+        <br />
+        On behalf of LW Entertainment Ltd.
+      </p>
+
       <p className="footer-legal">
         &copy; {new Date().getFullYear()} Futures Church &middot; Adelaide, South Australia
       </p>

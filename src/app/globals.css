@@ -1308,6 +1308,19 @@ body {
   color: var(--c-gold);
 }
 
+/* No uppercase transform here: the licensor's name is cased deliberately
+   (ORiGiN), and transforming it would misprint a contractual credit. */
+.footer-licence {
+  margin: 0;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.64rem, 2vw, 0.78rem);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  color: rgba(240, 235, 225, 0.6);
+}
+
 .footer-legal {
   margin: 0;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
