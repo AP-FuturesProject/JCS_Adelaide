@@ -49,7 +49,7 @@ export default function Home() {
             align="center"
             tileStyle="board"
             tileColor="#0a0a0a"
-            textColor="#c9a84c"
+            textColor="#ca1415"
             glare={0.75}
             depth={0.55}
             tileRadius={3}
