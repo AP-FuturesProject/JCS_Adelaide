@@ -18,6 +18,11 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Jesus Christ Superstar Adelaide",
   description: "Coming Soon",
+  icons: {
+    icon: "/jcs-icon.webp",
+    shortcut: "/jcs-icon.webp",
+    apple: "/jcs-icon.webp",
+  },
 };
 
 export const viewport: Viewport = {
