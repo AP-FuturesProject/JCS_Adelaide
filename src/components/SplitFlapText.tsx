@@ -317,6 +317,8 @@ const SplitFlapText = ({
         if (document.hidden) { scheduleNext(timingRef.current.holdMs); return; }
         const nextIndex = indexRef.current + 1;
         if (nextIndex >= normalizedPhrases.length && !loop) return;
+        // A single phrase would diff to zero flips, so blank the board to replay it.
+        if (normalizedPhrases.length === 1) shownRef.current = ' '.repeat(width);
         const duration = show(nextIndex % normalizedPhrases.length);
         scheduleNext(timingRef.current.holdMs + duration);
       }, delay);
@@ -345,7 +347,7 @@ const SplitFlapText = ({
       startDuration = show(indexRef.current);
     }
 
-    if (normalizedPhrases.length > 1) {
+    if (normalizedPhrases.length > 1 || loop) {
       scheduleNext(timingRef.current.holdMs + startDuration);
     }
 

@@ -42,7 +42,7 @@ export default function Home() {
             words={['EASTER 2027']}
             flipDuration={0.09}
             stagger={0.035}
-            cycleDelay={2400}
+            cycleDelay={15000}
             charset="alphanumeric"
             flipsPerChar={10}
             order="random"
@@ -55,7 +55,7 @@ export default function Home() {
             tileRadius={3}
             gap={3}
             fontSize={32}
-            loop={false}
+            loop
             padTo={11}
             intro
           />

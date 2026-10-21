@@ -142,7 +142,6 @@ body {
 .logo-wrap {
   width: min(860px, 90vw);
   position: relative;
-  overflow: hidden;
 }
 
 .logo-wrap::after {
