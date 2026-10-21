@@ -91,6 +91,9 @@ export interface CurvedLoopProps {
   separator?: string;
   separatorColor?: string;
   scrollBoost?: number;
+  /** "xMidYMid slice" lets a fixed-height strip crop instead of letterboxing,
+   *  and keeps the path centred in the box at every width. */
+  preserveAspectRatio?: string;
 }
 
 const CurvedLoop = ({
@@ -111,6 +114,7 @@ const CurvedLoop = ({
   separator = '',
   separatorColor,
   scrollBoost = 0,
+  preserveAspectRatio,
 }: CurvedLoopProps) => {
   const body = useMemo(() => marqueeText.replace(/\s+$/, ''), [marqueeText]);
   const mark = String(separator ?? '').trim();
@@ -360,6 +364,7 @@ const CurvedLoop = ({
         ref={svgRef}
         className="curved-loop-svg"
         viewBox={geometry.viewBox}
+        preserveAspectRatio={preserveAspectRatio}
         style={{
           fontSize,
           fontWeight,

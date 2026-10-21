@@ -117,10 +117,13 @@ export default function Home() {
           speed={1.4}
           curveAmount={0}
           direction="left"
-          fontSize={96}
+          fontSize={42}
           fontWeight={700}
-          letterSpacing={-6}
-          separator="—"
+          letterSpacing={1}
+          /* Crops rather than letterboxing, and keeps the line centred in the
+             strip at any height. */
+          preserveAspectRatio="xMidYMid slice"
+          separator="•"
           outline={false}
           scrollBoost={0.5}
           edgeFade={0.7}

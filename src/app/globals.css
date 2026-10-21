@@ -1403,12 +1403,10 @@ body {
   font-family: var(--font-anton), "Anton", Impact, sans-serif;
 }
 
-/* Aspect must match the 1440x120 viewBox or the SVG letterboxes and the
-   marquee stops reaching the edges. The glyphs only occupy y 27-115 of that
-   box, so negative margins trim the empty bands instead — a thinner strip
-   with nothing clipped. Margin percentages resolve against width. */
+/* With "slice" the SVG covers the box and crops the spare band instead of
+   letterboxing, so the height can be set directly. xMidYMid keeps user y=60 —
+   which is where "line" centres the glyphs — on the strip's centre line.
+   The clamp stops it collapsing to a sliver on phones. */
 .phenomenon-strip .curved-loop-svg {
-  aspect-ratio: 1440 / 120;
-  margin-top: -1.2%;
-  margin-bottom: -0.3%;
+  height: clamp(38px, 3.8vw, 54px);
 }
