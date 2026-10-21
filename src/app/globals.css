@@ -120,11 +120,8 @@ body {
   margin-bottom: 2rem;
 }
 
-.rule {
-  width: 4rem;
-  height: 1px;
-  background: var(--c-rule);
-  margin: 2rem 0;
+.date-board {
+  margin-top: 2.75rem;
 }
 
 .coming-soon {
@@ -183,12 +180,16 @@ body {
 
 /* ─── Audition button ─────────────────────────────────────── */
 
-.auditions-cta {
-  margin-top: 2rem;
+/* Needs to out-specify .specular-button, which sets margin and font itself and
+   is defined later. The specular canvas bleeds 24px past the button, so the
+   gap has to clear that as well as the board above it. */
+.specular-button.auditions-cta {
+  margin-top: 3.5rem;
   max-width: 90vw;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(0.875rem, 2.5vw, 0.95rem);
-  letter-spacing: 0.25em;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
 }

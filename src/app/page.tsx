@@ -39,8 +39,8 @@ export default function Home() {
               className="logo-img"
             />
           </div>
-          <div className="rule" aria-hidden="true" />
           <SplitFlapText
+            className="date-board"
             words={['EASTER 2027']}
             flipDuration={0.09}
             stagger={0.035}
