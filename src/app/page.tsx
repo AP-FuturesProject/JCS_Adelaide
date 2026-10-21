@@ -69,7 +69,8 @@ export default function Home() {
             words={['EASTER 2027']}
             flipDuration={0.09}
             stagger={0.035}
-            cycleDelay={15000}
+            cycleDelay={20000}
+            flickerEvery={1500}
             charset="alphanumeric"
             flipsPerChar={10}
             order="random"
@@ -121,8 +122,11 @@ export default function Home() {
           fontWeight={700}
           letterSpacing={1}
           /* Crops rather than letterboxing, and keeps the line centred in the
-             strip at any height. */
+             strip at any height. The wide viewWidth keeps the height term
+             dominant in slice's max(w/viewWidth, h/120), so the text tracks
+             the strip's height instead of growing with the viewport. */
           preserveAspectRatio="xMidYMid slice"
+          viewWidth={4800}
           separator="•"
           outline={false}
           scrollBoost={0.5}

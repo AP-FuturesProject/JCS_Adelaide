@@ -741,7 +741,12 @@ body {
 
 /* ─── Meet the team ───────────────────────────────────────── */
 
+/* Grain sits in ::before. It is absolutely positioned, which also takes it
+   out of the flex flow it would otherwise join as a stray item. */
 .team-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: #ca1415;
   padding: 2.5rem 1rem;
   display: flex;
@@ -755,6 +760,42 @@ body {
     padding: 4rem 2rem;
     gap: 2.75rem;
   }
+}
+
+.team-section::before {
+  content: '';
+  position: absolute;
+  /* Oversized so the drift never pulls an edge into view. */
+  inset: -25%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  opacity: 0.26;
+  mix-blend-mode: overlay;
+  animation: team-grain 0.7s steps(5) infinite;
+}
+
+/* Stepped rather than eased, so it reads as film grain instead of a slide. */
+@keyframes team-grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3%, 2%); }
+  40%  { transform: translate(2%, -3%); }
+  60%  { transform: translate(-2%, -2%); }
+  80%  { transform: translate(3%, 1%); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-section::before { animation: none; }
+}
+
+/* Above the grain layer. */
+.team-heading,
+.team-grid {
+  position: relative;
+  z-index: 1;
 }
 
 /* Gold would sit too close to the red ground to read, so this one goes cream. */

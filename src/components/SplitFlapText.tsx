@@ -117,6 +117,9 @@ interface SplitFlapTextProps extends Omit<HTMLAttributes<HTMLDivElement>, 'style
   padTo?: number;
   align?: 'left' | 'center' | 'right';
   intro?: boolean;
+  /** ms between single-tile flickers; 0 disables them. */
+  flickerEvery?: number;
+  flickerFlips?: number;
   glare?: number;
   depth?: number;
   order?: string;
@@ -142,6 +145,8 @@ const SplitFlapText = ({
   padTo = 12,
   align = 'left',
   intro = true,
+  flickerEvery = 0,
+  flickerFlips = 3,
   glare = 0,
   depth = 0.5,
   order = 'left',
@@ -357,6 +362,69 @@ const SplitFlapText = ({
       stopFrame();
     };
   }, [normalizedPhrases, width, loop, intro, prefersReducedMotion]);
+
+  // One tile twitches between full-board cycles, like a board correcting
+  // itself. Skipped whenever the main cycle is mid-flight so the two
+  // animations never drive the same tile at once.
+  useEffect(() => {
+    if (!flickerEvery || prefersReducedMotion) return;
+    let cancelled = false;
+    let timer = 0;
+    let raf = 0;
+
+    const schedule = () => {
+      timer = window.setTimeout(run, flickerEvery);
+    };
+
+    const run = () => {
+      if (cancelled) return;
+      const target = shownRef.current;
+      if (!target || rafRef.current || document.hidden) return schedule();
+
+      const spots: number[] = [];
+      for (let i = 0; i < target.length; i++) if (target[i] !== ' ') spots.push(i);
+      if (!spots.length) return schedule();
+
+      const index = spots[Math.floor(Math.random() * spots.length)];
+      const { flipMs, glyphs } = timingRef.current;
+      const sequence = buildSequence(target[index], Math.max(1, flickerFlips), glyphs);
+      const startedAt = performance.now();
+      let step = -1;
+
+      const paint = (current: string, next: string, flipping: boolean) =>
+        setTiles(prev => {
+          const tile = prev[index];
+          if (!tile) return prev;
+          const copy = [...prev];
+          copy[index] = { current, next, flipping, tick: tile.tick + 1 };
+          return copy;
+        });
+
+      const tick = (now: number) => {
+        if (cancelled) return;
+        const at = Math.floor((now - startedAt) / flipMs);
+        if (at >= sequence.length) {
+          paint(target[index], target[index], false);
+          schedule();
+          return;
+        }
+        if (at !== step) {
+          step = at;
+          paint(at === 0 ? target[index] : sequence[at - 1], sequence[at], true);
+        }
+        raf = requestAnimationFrame(tick);
+      };
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    schedule();
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      cancelAnimationFrame(raf);
+    };
+  }, [flickerEvery, flickerFlips, prefersReducedMotion, normalizedPhrases]);
 
   const label = String(phrases[activeIndex] ?? phrases[0] ?? '').trim();
   const minimal = tileStyle === 'minimal';

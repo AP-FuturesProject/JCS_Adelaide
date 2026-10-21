@@ -53,7 +53,7 @@ const wavePath = (amplitude: number, baseline: number) => {
 
 type Shape = 'arc' | 'line' | 'wave' | 'circle';
 
-const getGeometry = (shape: Shape, curveAmount: number, fontSize: number, spacing: number) => {
+const getGeometry = (shape: Shape, curveAmount: number, fontSize: number, spacing: number, vw = VIEW_WIDTH) => {
   if (shape === 'circle') {
     const repeats = spacing > 0 ? Math.max(1, Math.round((TAU * fontSize * RING_RADIUS) / spacing)) : 1;
     const radius = spacing > 0 ? (repeats * spacing) / TAU : fontSize * RING_RADIUS;
@@ -63,14 +63,14 @@ const getGeometry = (shape: Shape, curveAmount: number, fontSize: number, spacin
       viewBox: `${-half} ${-half} ${half * 2} ${half * 2}`,
       radius,
       repeats,
-      span: Math.min(1, (fontSize * (RING_RADIUS + 1) * 2) / VIEW_WIDTH),
+      span: Math.min(1, (fontSize * (RING_RADIUS + 1) * 2) / vw),
     };
   }
-  const flat = { viewBox: `0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`, radius: 0, repeats: 0, span: 1 };
+  const flat = { viewBox: `0 0 ${vw} ${VIEW_HEIGHT}`, radius: 0, repeats: 0, span: 1 };
   const baseline = VIEW_HEIGHT / 2 + fontSize * 0.36;
-  if (shape === 'line') return { ...flat, d: `M-100,${baseline} L${VIEW_WIDTH + 100},${baseline}` };
+  if (shape === 'line') return { ...flat, d: `M-100,${baseline} L${vw + 100},${baseline}` };
   if (shape === 'wave') return { ...flat, d: wavePath(curveAmount * 0.25, baseline) };
-  return { ...flat, d: `M-100,40 Q500,${40 + curveAmount} 1540,40` };
+  return { ...flat, d: `M-100,40 Q${vw / 2.88},${40 + curveAmount} ${vw + 100},40` };
 };
 
 export interface CurvedLoopProps {
@@ -94,6 +94,10 @@ export interface CurvedLoopProps {
   /** "xMidYMid slice" lets a fixed-height strip crop instead of letterboxing,
    *  and keeps the path centred in the box at every width. */
   preserveAspectRatio?: string;
+  /** The viewBox width the marquee is designed against. With "slice" the scale
+   *  is max(width/viewWidth, height/120); widening this keeps the height term
+   *  dominant, so text size tracks the strip instead of the viewport. */
+  viewWidth?: number;
 }
 
 const CurvedLoop = ({
@@ -115,6 +119,7 @@ const CurvedLoop = ({
   separatorColor,
   scrollBoost = 0,
   preserveAspectRatio,
+  viewWidth = VIEW_WIDTH,
 }: CurvedLoopProps) => {
   const body = useMemo(() => marqueeText.replace(/\s+$/, ''), [marqueeText]);
   const mark = String(separator ?? '').trim();
@@ -152,7 +157,7 @@ const CurvedLoop = ({
   });
 
   const ring = shape === 'circle';
-  const geometry = getGeometry(shape, curveAmount, fontSize, spacing);
+  const geometry = getGeometry(shape, curveAmount, fontSize, spacing, viewWidth);
   const ready = spacing > 0;
   const copies = ready ? (ring ? geometry.repeats + 1 : Math.ceil((pathLength || 1800) / spacing) + 2) : 1;
   const mask = edgeMask(edgeFade, geometry.span);
@@ -286,14 +291,14 @@ const CurvedLoop = ({
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (!interactive || !ready) return;
     const rect = svgRef.current?.getBoundingClientRect();
-    const width = rect?.width || VIEW_WIDTH;
+    const width = rect?.width || viewWidth;
     const cx = rect ? rect.left + rect.width / 2 : e.clientX;
     const cy = rect ? rect.top + rect.height / 2 : e.clientY;
     dragRef.current = {
       active: true,
       x: e.clientX,
       time: performance.now(),
-      scale: VIEW_WIDTH / width,
+      scale: viewWidth / width,
       velocity: 0,
       ring,
       radius: geometry.radius,
