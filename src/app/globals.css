@@ -1599,11 +1599,15 @@ body {
   color: var(--c-gold);
 }
 
+/* Anton, uppercase, to sit with the other headings on the page — the same
+   face "Follow Along" and "Meet The Team" use. Anton ships one weight, so no
+   synthetic bold. */
 .contact-modal__title {
-  font-family: var(--font-cinzel), "Cinzel Decorative", Georgia, serif;
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--font-anton), "Anton", Impact, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--c-text);
 }
 
