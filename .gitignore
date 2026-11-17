@@ -35,3 +35,9 @@ next-env.d.ts
 
 # Local Netlify folder
 .netlify
+
+# Written by `next dev` on every startup and re-created if deleted
+# (node_modules/next/dist/server/lib/generate-agent-files.js), so it is
+# ignored rather than tracked.
+/AGENTS.md
+/CLAUDE.md
