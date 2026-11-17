@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Form definitions</title>
+  </head>
+  <body>
+    <!--
+      Netlify finds forms by parsing static HTML at build time, and Next.js
+      renders ours on the client, so it would never be seen. This file exists
+      only to declare the form; the real one posts here as urlencoded data.
+      The form NAME is what Netlify puts in the notification email subject,
+      hence the wording.
+    -->
+    <form name="JCS - new website enquiry" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="JCS - new website enquiry" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
