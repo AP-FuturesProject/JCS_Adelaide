@@ -102,10 +102,11 @@ export default function ContactCta() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,
       });
-      if (!res.ok) throw new Error(`Netlify responded ${res.status}`);
+      if (!res.ok) throw new Error(`Netlify responded ${res.status} ${res.statusText}`);
       form.reset();
       setStatus("sent");
-    } catch {
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
       setStatus("error");
     }
   };
@@ -222,8 +223,8 @@ export default function ContactCta() {
 
                 {status === "error" ? (
                   <p className="contact-form__error" role="alert">
-                    Something went wrong sending that. Please try again, or email{" "}
-                    <a href="mailto:georgie.harris@futures.church">georgie.harris@futures.church</a>.
+                    Something went wrong sending that. Please try again, or reach us
+                    through Instagram.
                   </p>
                 ) : null}
 
