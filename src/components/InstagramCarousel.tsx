@@ -7,9 +7,12 @@ export interface InstagramPost {
   permalink: string;
   alt: string;
   src: string;
-  srcSet: string;
+  /* Absent when the post arrived without Behold's generated sizes — a reel
+     carrying only a thumbnail, for instance. */
+  srcSet?: string;
   width: number;
   height: number;
+  isVideo?: boolean;
 }
 
 export default function InstagramCarousel({ posts }: { posts: InstagramPost[] }) {
@@ -64,20 +67,27 @@ export default function InstagramCarousel({ posts }: { posts: InstagramPost[] })
             href={post.permalink}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open Instagram post ${i + 1} of ${posts.length}`}
+            aria-label={`Open Instagram ${post.isVideo ? "video" : "post"} ${i + 1} of ${posts.length}`}
             aria-hidden={i !== index}
             tabIndex={i === index ? 0 : -1}
           >
             <img
               src={post.src}
               srcSet={post.srcSet}
-              sizes="(min-width: 480px) 420px, 88vw"
+              sizes={post.srcSet ? "(min-width: 480px) 420px, 88vw" : undefined}
               width={post.width}
               height={post.height}
               alt={post.alt}
               loading={i === 0 ? "eager" : "lazy"}
               draggable={false}
             />
+            {post.isVideo ? (
+              <span className="ig-slide__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            ) : null}
           </a>
         ))}
       </div>

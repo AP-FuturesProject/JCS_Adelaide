@@ -377,11 +377,36 @@ body {
 }
 
 .ig-slide {
+  position: relative;
   flex: 0 0 100%;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   display: block;
   line-height: 0;
+}
+
+/* Reels are 9:16 and would run straight out of the phone screen, taking the
+   dots with them. 4:5 is what the arrow positions already assume, so every
+   post is cropped to it and they all line up. */
+.ig-slide img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Marks a reel or video as one, since the slide only ever shows its poster. */
+.ig-slide__play {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  pointer-events: none;
 }
 
 .ig-slide img {
