@@ -142,7 +142,7 @@ export default function ContactCta() {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            aria-describedby={descId}
+            aria-describedby={status === "sent" ? undefined : descId}
             ref={dialogRef}
           >
             <button type="button" className="contact-modal__close" onClick={close} aria-label="Close">
@@ -152,9 +152,11 @@ export default function ContactCta() {
             <h2 id={titleId} className="contact-modal__title">
               Get In Touch
             </h2>
-            <p id={descId} className="contact-modal__intro">
-              Tell us a little about yourself and how you&rsquo;d like to help. We&rsquo;ll be in touch.
-            </p>
+            {status === "sent" ? null : (
+              <p id={descId} className="contact-modal__intro">
+                Tell us a little about yourself and how you&rsquo;d like to help. We&rsquo;ll be in touch.
+              </p>
+            )}
 
             {status === "sent" ? (
               <div className="contact-modal__done" role="status">
